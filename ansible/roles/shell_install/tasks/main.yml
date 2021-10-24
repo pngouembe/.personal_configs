@@ -1,0 +1,63 @@
+---
+- name: Install zsh packages
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ zsh_apt_install_list }}"
+  tags:
+    - packages
+
+- name: Clone oh-my-zsh repo
+  git:
+    repo: git://github.com/robbyrussell/oh-my-zsh.git
+    dest: "~/.oh-my-zsh"
+  tags:
+    - repos
+
+- name: Clone powerlevel10k repo
+  git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: ~/.oh-my-zsh/custom/themes/powerlevel10k
+    depth: 1
+  tags:
+    - repos
+
+
+- name: Check if .personal_configs dir exists
+  stat:
+    path: ~/.personal_configs
+  register: personal_configs_repo
+  tags:
+    - dotfiles
+
+- name: Remove old dotfiles
+  file:
+    path: ~/{{ item }}
+    state: absent
+  ignore_errors: true
+  with_items: "{{ shell_dotfiles_list }}"
+  when: personal_configs_repo.stat.exists
+  tags:
+    - dotfiles
+
+- name: Link new dotfiles
+  file:
+    path: ~/{{ item }}
+    src: ~/.personal_configs/ansible/roles/shell_install/files/{{ item }}
+    state: link
+  with_items: "{{ shell_dotfiles_list }}"
+  when: personal_configs_repo.stat.exists
+  tags:
+    - dotfiles
+- name: Copy the dotfiles
+  copy:
+    src: "{{ item }}"
+    dest: ~/{{ item }}
+  with_items: "{{ shell_dotfiles_list }}"
+  when: not personal_configs_repo.stat.exists
+  tags:
+    - dotfiles
+
+...

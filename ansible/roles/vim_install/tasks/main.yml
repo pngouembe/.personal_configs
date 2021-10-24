@@ -1,0 +1,8 @@
+---
+- name: Install Vim
+  become: yes
+  package:
+    name:
+      - vim
+    state: present
+...

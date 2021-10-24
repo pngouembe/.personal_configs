@@ -1,0 +1,22 @@
+---
+- name: Install git
+  become: yes
+  package:
+    name:
+      - git
+    state: present
+
+- name: Set vim as default git editor
+  git_config:
+    name: core.editor
+    value: vim
+    scope: global
+
+- name: Setting end of line to LF
+  git_config:
+    name: core.autocrlf
+    value: input
+    scope: global
+
+
+...

@@ -1,0 +1,13 @@
+---
+zsh_apt_install_list:
+  - zsh
+  - zsh-doc
+  - curl
+
+shell_dotfiles_list:
+  - .bashrc
+  - .dircolors
+  - .zshrc
+  - .p10k.zsh
+
+...

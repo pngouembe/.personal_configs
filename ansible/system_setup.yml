@@ -1,0 +1,13 @@
+---
+- name: Main system setup playbook
+  hosts: mymachines
+  roles:
+    - role: shell_install
+      tags: shell
+
+    - role: vim_install
+      tags: vim
+
+    - role: git_install
+      tags: git
+...

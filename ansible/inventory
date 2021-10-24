@@ -1,0 +1,3 @@
+[mymachines]
+localhost ansible_connection=local
+raspberrypi ansible_user=paul
