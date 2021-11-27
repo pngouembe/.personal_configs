@@ -20,4 +20,20 @@
   file:
     path: ~/spacevim_install.sh
     state: absent
+
+- name: Remove .vimrc
+  file:
+    path: ~/.vimrc
+    state: absent
+  ignore_errors: true
+  tags:
+    - dotfiles
+
+- name: Link new .vimrc
+  file:
+    path: ~/.vimrc
+    src: ~/.personal_configs/ansible/roles/vim_install/files/.vimrc
+    state: link
+  tags:
+    - dotfiles
 ...
