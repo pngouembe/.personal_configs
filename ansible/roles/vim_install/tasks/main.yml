@@ -5,4 +5,19 @@
     name:
       - vim
     state: present
+
+- name: Download SpaceVim install script
+  get_url:
+    url: "https://spacevim.org/install.sh"
+    dest: "~/spacevim_install.sh"
+    mode: "a+x"
+
+- name: Install SpaceVim
+  command:
+   cmd: "~/spacevim_install.sh"
+
+- name: Remove SpaceVim install script
+  file:
+    path: ~/spacevim_install.sh
+    state: absent
 ...
