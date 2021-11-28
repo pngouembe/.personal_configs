@@ -40,6 +40,14 @@
   tags:
     - dotfiles
 
+- name: Update .personal_configs repo
+  git:
+    repo: https://github.com/pngouembe/.personal_configs.git
+    dest: "~/.personal_configs"
+    clone: no
+    version: main
+  ignore_errors: true
+
 - name: Remove old dotfiles
   file:
     path: ~/{{ item }}
