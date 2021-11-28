@@ -24,30 +24,6 @@
   tags:
     - repos
 
-
-- name: Check if .personal_configs dir exists
-  stat:
-    path: ~/.personal_configs
-  register: personal_configs_repo
-  tags:
-    - dotfiles
-
-- name: Clone .personal_configs repo
-  git:
-    repo: https://github.com/pngouembe/.personal_configs.git
-    dest: "~/.personal_configs"
-  when: not personal_configs_repo.stat.exists
-  tags:
-    - dotfiles
-
-- name: Update .personal_configs repo
-  git:
-    repo: https://github.com/pngouembe/.personal_configs.git
-    dest: "~/.personal_configs"
-    clone: no
-    version: main
-  ignore_errors: true
-
 - name: Remove old dotfiles
   file:
     path: ~/{{ item }}

@@ -2,14 +2,18 @@
 - name: Main system setup playbook
   hosts: mymachines
   roles:
+    - role: git_install
+      tags: git
+
+    - role: common
+
+
     - role: shell_install
       tags: shell
 
     - role: vim_install
       tags: vim
 
-    - role: git_install
-      tags: git
 
 
 ...
