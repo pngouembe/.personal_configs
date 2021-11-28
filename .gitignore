@@ -1,0 +1,3 @@
+ansible/custom_inventories/*
+!ansible/custom_inventories/README.md
+!ansible/custom_inventories/inventory_template
