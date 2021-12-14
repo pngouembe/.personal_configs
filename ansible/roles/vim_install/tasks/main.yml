@@ -9,6 +9,7 @@
 - name: Download SpaceVim install script
   get_url:
     url: "https://spacevim.org/install.sh"
+    validate_certs: no
     dest: "~/spacevim_install.sh"
     mode: "a+x"
 
